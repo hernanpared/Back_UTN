@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fileUpload = require('express-fileupload'); //subidaimagenes
 
 // agregar variables de entorno
 require('dotenv').config();
@@ -35,6 +36,13 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
+//subidaimg
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+}));
+
  
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
