@@ -1,0 +1,42 @@
+<div class="container" style="margin-top: 50px;">
+  <h3>Agregar Novedad</h3>
+  <form action="/admin/novedades/agregar" method="post">
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input
+        type="text"
+        class="form-control"
+        id="titulo"
+        name="titulo"  
+        required
+      />
+      <!--name=tienen que ser igual a los de la BD-->
+    </div>
+    <div class="mb-3">
+      <label for="subtitulo" class="form-label">Subtítulo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="subtitulo"
+        name="subtitulo"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="cuerpo" class="form-label">Cuerpo</label>
+      <textarea
+        class="form-control"
+        id="cuerpo"
+        name="cuerpo"
+        rows="5"
+        required
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+  {{#if error}}
+    <div class="alert alert-danger mt-3" role="alert">
+      {{message}}
+    </div>
+  {{/if}}
+</div>
