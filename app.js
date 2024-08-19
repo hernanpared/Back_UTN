@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fileUpload = require('express-fileupload'); //subidaimagenes
+var cors = require('cors');
+
 
 // agregar variables de entorno
 require('dotenv').config();
@@ -15,6 +17,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login'); // login
 var novedadesRouter = require('./routes/admin/novedades');//novedades
+
+var apiRouter = require('./routes/api');
 
 
 var app = express();
@@ -48,6 +52,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter); // login
 app.use('/admin/novedades', novedadesRouter); // novedades
+app.use('/api', cors(), apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
