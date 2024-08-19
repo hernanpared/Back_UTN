@@ -11,6 +11,25 @@ const uploader = util.promisify(cloudinary.uploader.upload);
 router.get("/", async function (req, res, next) {
   var novedades = await novedadesModel.getNovedades();
 
+  novedades = novedades.map(novedad => {
+    if (novedad.img_id) {
+      const imagen = cloudinary.image(novedad.img_id, {
+        width: 100,
+        height: 100,
+        crop: 'fill'
+      });
+      return {
+        ...novedad,
+        imagen
+      }
+    } else {
+      return {
+        ...novedad,
+        imagen: ''
+      }
+    }
+  });
+
   res.render("admin/novedades", {
     layout: "admin/layout",
     usuario: req.session.nombre,
